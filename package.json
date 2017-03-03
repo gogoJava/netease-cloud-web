@@ -13,9 +13,18 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "css-loader": "^0.26.2",
+    "keycode": "^2.1.8",
+    "muse-ui": "^2.0.0-rc.5",
+    "sass-loader": "^6.0.2",
+    "style-loader": "^0.13.2",
     "vue": "^2.1.10",
+    "vue-lazyload": "^1.0.0-rc12",
+    "vue-resource": "^1.2.1",
     "vue-router": "^2.2.0",
-    "vuex": "^2.1.1"
+    "vue-style-loader": "^2.0.3",
+    "vuex": "^2.1.1",
+    "vuex-router-sync": "^4.1.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -55,6 +64,8 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^2.0.2",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
     "lolex": "^1.5.2",
     "mocha": "^3.2.0",
     "chai": "^3.5.0",

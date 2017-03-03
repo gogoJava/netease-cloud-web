@@ -26,6 +26,18 @@ var webpackConfig = merge(baseWebpackConfig, {
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
+  // output: {
+  //   path: path.resolve(__dirname, '../dist'),
+  //   publicPath: '/',
+  //   filename: utils.assetsPath('js/[name].[chunkhash].js'),
+  //   chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+  // },
+  // vue: {
+  //   loaders: utils.cssLoaders({
+  //     sourceMap: true,
+  //     extract: true
+  //   })
+  // },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
@@ -129,7 +141,8 @@ for(var page in pages) {
     })
   }
   // 需要生成几个html文件，就配置几个HtmlWebpackPlugin对象
-  module.exports.plugins.push(new HtmlWebpackPlugin(conf))
+  // module.exports.plugins.push(new HtmlWebpackPlugin(conf))
+  webpackConfig.plugins.push(new HtmlWebpackPlugin(conf))
 }
 
 if (config.build.bundleAnalyzerReport) {

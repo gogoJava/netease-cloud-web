@@ -6,36 +6,35 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
+  mode: 'history', // #
   routes: [{
     path: '/index',
     component: require('../views/index.vue'),
     children: [
-      // {
-      //   path: 'rage',
-      //   component: require('../views/rage')
-      // },
-      // {
-      //   path: 'songList',
-      //   component: require('../views/songList')
-      // },
-      // {
-      //   path: 'leaderBoard',
-      //   component: require('../views/leaderBoard')
-      // },
-      // {
-      //   path: 'hotSinger',
-      //   component: require('../views/hotSinger')
-      // }
+      {
+        path: 'recommend',
+        component: require('../views/recommend/index.vue')
+      }, {
+        path: 'songList',
+        component: require('../views/songList/index.vue')
+      }, {
+        path: 'radio',
+        component: require('../views/radio/index.vue')
+      }, {
+        path: 'singer',
+        component: require('../views/singer/index.vue')
+      }
     ]
+  }, {
+    //   name: 'playerDetail',
+    //   path: '/playerDetail/:id',
+    //   component: require('../views/singer/index.vue')
+    // }
+    // }, {
+    path: '/playListDetail/:id',
+    name: 'playListDetail',
+    component: require('../views/playListDetail/index.vue')
   }
-  //   {
-  //   name: 'playerDetail',
-  //   path: '/playerDetail/:id',
-  //   component: require('../views/playerDetail')
-  // }, {
-  //   path: '/playListDetail/:id',
-  //   name: 'playListDetail',
-  //   component: require('../views/playListDetail')
   // }, {
   //   path: '*', redirect: '/index/rage'
   // }
