@@ -1,18 +1,30 @@
-import {PLAYER_SHOW, ADD_TO_PLAY_LIST, SET_AUDIO, OPEN_LOADING, CLOSE_LOADING, PAUSE, PLAY} from '../../store/mutation-types'
+import {
+  PLAYER_SHOW,
+  ADD_TO_PLAY_LIST,
+  SET_AUDIO,
+  OPEN_LOADING,
+  CLOSE_LOADING,
+  PAUSE,
+  PLAY,
+  SET_AUDIO_INDEX,
+  REMOVE_AUDIO,
+  PLAY_NEXT
+} from '../../store/mutation-types'
 
 export const MUTATION_NAME = 'media-player'
+const audio = {
+  'id': 0,
+  'name': '歌曲名称',
+  'singer': '演唱者',
+  'albumPic': '/static/icon/player-bar.png',
+  'location': '',
+  'album': ''
+}
 export default {
   [MUTATION_NAME]: {
     // 默认值
     state: {
-      audio: {
-        'id': 0,
-        'name': '歌曲名称',
-        'singer': '演唱者',
-        'albumPic': '/static/icon/player-bar.png',
-        'location': '',
-        'album': ''
-      },
+      audio: audio,
       songList: [],
       playing: false, // 是否正在播放
       currentIndex: 0, // 当前播放的歌曲位置
@@ -31,6 +43,30 @@ export default {
       [SET_AUDIO] (state, location) {
         state.audio = state.songList[state.currentIndex - 1]
         state.audio.location = location || ''
+      },
+      [SET_AUDIO_INDEX] (state, index) {
+        state.audio = state.songList[index]
+        state.currentIndex = index + 1
+      },
+      [PLAY_NEXT] (state) {
+        state.currentIndex++
+        // 如果是最后一首，则返回到第一首歌
+        if (state.currentIndex > state.songList.length) {
+          state.currentIndex = 1
+        }
+        state.audio = state.songList[state.currentIndex - 1]
+      },
+      [REMOVE_AUDIO] (state, index) {
+        state.songList.splice(index, 1)
+        if (index === state.songList.length) {
+          index--
+        }
+        state.audio = state.songList[index]
+        state.currentIndex = index + 1
+        if (state.songList.length === 0) {
+          state.audio = audio
+          state.playing = false
+        }
       },
       [OPEN_LOADING] (state) {
         state.loading = true

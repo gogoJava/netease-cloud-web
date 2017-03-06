@@ -213,6 +213,24 @@
         value: 0
       }
     },
+    beforeRouteEnter: (to, from, next) => {
+      next(vm => {
+        window.onscroll = () => {
+          var opa = window.pageYOffset / 150
+          if (opa > 0.5) {
+            vm.fname = vm.name
+          } else {
+            vm.fname = '歌单'
+          }
+          vm.opacity = window.pageYOffset / 150
+        }
+      })
+    },
+    // 路由离开时清除onscroll事件
+    beforeRouteLeave: (to, from, next) => {
+      window.onscroll = null
+      next()
+    },
     computed: {
       ...getters
     },

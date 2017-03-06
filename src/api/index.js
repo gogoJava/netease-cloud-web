@@ -24,3 +24,9 @@ export const getSongApi = (id) => {
     method: 'get'
   })
 }
+export const getRecommendListApi = (cat, order, offset, total, limit) => {
+  return request({
+    url: _baseUrl + '?type=topPlayList&cat=' + cat + '&offset=' + offset + '&limit=' + limit,
+    method: 'get'
+  })
+}

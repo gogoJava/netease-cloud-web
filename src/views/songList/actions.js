@@ -18,7 +18,7 @@ const init = async function (store) {
 // 获取歌单
 const getPlayList = async () => {
   this.loading = true
-  const resp = await getPlayListApi('全部', 'hot', this.offset, true, 6)
+  const resp = await getPlayListApi('全部', 'hot', this.offset, true, GET_SONG_LIMIT)
   console.log('=================')
   console.log(resp)
   var total = resp.total || 0

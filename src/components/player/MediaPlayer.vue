@@ -106,23 +106,33 @@
         <icon-button class="mini-btn play" :class="{pause: playing}" @click="toggleStatus"/>
         <icon-button class="mini-btn next" @click="nextSong"/>
       </div>
+      <div>
+        <progress-bar :total="totalTime" :value="currentTime"></progress-bar>
+      </div>
     </div>
+    <play-list :show="listShow" @closePlayList="closePlayList"></play-list>
   </div>
 </template>
 
 <script type='text/babel'>
   import iconButton from 'muse-ui/src/iconButton/iconButton.vue'
   import circularProgress from 'muse-ui/src/circularProgress/circularProgress.vue'
+  import ProgressBar from '../progressBar/ProgressBar.vue'
+  import playList from '../playList/playList.vue'
   import getters from './getters'
   import actions from './actions'
   export default {
     components: {
       iconButton,
-      circularProgress
+      circularProgress,
+      ProgressBar,
+      playList
     },
     data () {
       return {
-//        playing: true
+        totalTime: 100,
+        currentTime: 0,
+        listShow: false // 播放列表显示
       }
     },
     created () {
@@ -143,12 +153,17 @@
       },
       showList () {
         console.log('显示播放列表')
+        this.listShow = true
       },
-      nextSong () {
-        console.log('下一首')
+      closePlayList () {
+        console.log('关闭播放列表')
+        this.listShow = false
       },
       updateTime () {
-        console.log('updateTime')
+        var myaudio = document.getElementById('audioPlay')
+        this.totalTime = parseInt(myaudio.duration)
+        this.currentTime = parseInt(myaudio.currentTime)
+//        console.log('updateTime', totalTime, currentTime)
       },
       loadError () {
         console.log('loadError')
